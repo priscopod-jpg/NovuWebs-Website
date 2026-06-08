@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-bg: hsl(0 0% 4%);
+  --color-bg2: hsl(0 0% 7%);
+  --color-bg3: hsl(0 0% 10%);
+  --color-fg: hsl(0 0% 96%);
+  --color-fg2: hsl(0 0% 65%);
+  --color-fg3: hsl(0 0% 40%);
+  --color-gold: hsl(42 56% 55%);
+  --color-gold-bright: hsl(42 84% 66%);
+  --color-gold-dim: hsl(38 50% 36%);
+  --color-green: hsl(145 51% 47%);
+  --color-red: hsl(0 65% 58%);
+  
+  --color-border-gold: rgba(201, 168, 76, 0.12);
+  --color-border-white: rgba(255, 255, 255, 0.06);
+
+  --animate-shimmer: shimmer 2s infinite linear;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  body {
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 96%);
+    font-family: var(--font-sans);
+  }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Ticker Scroll animation */
+@keyframes scroll-ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll-ticker 25s linear infinite;
+}
+
+.animate-ticker-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Shifter background animation for the Dot Grid as requested */
+@keyframes dotShift {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+.dot-grid-animated {
+  background-image: radial-gradient(rgba(201, 168, 76, 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  animation: dotShift 60s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0 0% 4%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(42 56% 35%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(42 56% 55%);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
