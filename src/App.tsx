@@ -1019,9 +1019,12 @@ export default function App() {
           {/* Footer Left, logo + descriptive tag */}
           <div className="lg:col-span-6 space-y-5">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded bg-[hsl(42,56%,55%)] flex items-center justify-center font-bold text-black font-sans text-sm">
-                N
-              </div>
+              <img 
+                src="https://www.image2url.com/r2/default/images/1780947779301-df370fd3-6951-4b17-8985-5e37b1b0e441.png"
+                alt="NovuWebs Logo"
+                className="w-10 h-10 object-contain mix-blend-screen"
+                referrerPolicy="no-referrer"
+              />
               <span className="font-sans font-bold text-base text-white">
                 NovuWebs<span className="text-[#C9A84C] font-mono">.AI</span>
               </span>

@@ -58,14 +58,14 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
         {/* Logo Left */}
         <div 
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="flex items-center gap-2.5 cursor-pointer group"
+          className="flex items-center cursor-pointer group"
         >
-          <div className="w-8 h-8 rounded-lg bg-[hsl(42,56%,55%)] flex items-center justify-center font-bold text-black font-sans leading-none text-base group-hover:bg-[#F0C060] transition-colors shadow-lg shadow-[#C9A84C]/10">
-            N
-          </div>
-          <span className="font-sans font-bold text-lg tracking-tight text-white select-none">
-            NovuWebs<span className="text-[#C9A84C] font-mono select-none">.AI</span>
-          </span>
+          <img 
+            src="https://www.image2url.com/r2/default/images/1780947779301-df370fd3-6951-4b17-8985-5e37b1b0e441.png"
+            alt="NovuWebs Logo"
+            className="h-11 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-screen"
+            referrerPolicy="no-referrer"
+          />
         </div>
 
         {/* Center Nav Links (Desktop) */}
