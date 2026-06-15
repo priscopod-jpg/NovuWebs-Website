@@ -135,7 +135,17 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    
+    // Support root paths without extensions (e.g. /services serving services.html)
+    app.use(express.static(distPath, { extensions: ["html"] }));
+    
+    // Explicit mappings for multi-page structure
+    app.get("/services", (req, res) => res.sendFile(path.join(distPath, "services.html")));
+    app.get("/process", (req, res) => res.sendFile(path.join(distPath, "process.html")));
+    app.get("/calculator", (req, res) => res.sendFile(path.join(distPath, "calculator.html")));
+    app.get("/results", (req, res) => res.sendFile(path.join(distPath, "results.html")));
+    app.get("/contact", (req, res) => res.sendFile(path.join(distPath, "contact.html")));
+    
     app.get("*", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });

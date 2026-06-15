@@ -32,6 +32,25 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
     return () => clearInterval(interval);
   }, []);
 
+  const [activeId, setActiveId] = useState("");
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path.includes("services")) {
+      setActiveId("services");
+    } else if (path.includes("process")) {
+      setActiveId("process");
+    } else if (path.includes("calculator")) {
+      setActiveId("calculator");
+    } else if (path.includes("results")) {
+      setActiveId("results");
+    } else if (path.includes("contact")) {
+      setActiveId("contact");
+    } else {
+      setActiveId("");
+    }
+  }, []);
+
   const navLinks = [
     { name: "Services", id: "services" },
     { name: "Process", id: "process" },
@@ -42,7 +61,7 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
 
   const handleLinkClick = (id: string) => {
     setMobileMenuOpen(false);
-    onScrollTo(id);
+    window.location.href = `/${id}.html`;
   };
 
   return (
@@ -57,7 +76,7 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo Left */}
         <div 
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => window.location.href = "/index.html"}
           className="flex items-center cursor-pointer group"
         >
           <img 
@@ -70,21 +89,26 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
 
         {/* Center Nav Links (Desktop) */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <div
-              key={link.id}
-              onClick={() => handleLinkClick(link.id)}
-              className="relative py-2 text-[10px] font-sans font-semibold tracking-widest text-[#fg2] hover:text-[#fg] cursor-pointer transition-colors uppercase"
-            >
-              {link.name}
-              <motion.div
-                className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#C9A84C]"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-              />
-            </div>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeId === link.id;
+            return (
+              <div
+                key={link.id}
+                onClick={() => handleLinkClick(link.id)}
+                className={`relative py-2 text-[10px] font-sans font-semibold tracking-widest cursor-pointer transition-colors uppercase ${
+                  isActive ? "text-[#C9A84C]" : "text-[#fg2] hover:text-[#fg]"
+                }`}
+              >
+                {link.name}
+                <motion.div
+                  className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#C9A84C]"
+                  initial={{ scaleX: isActive ? 1 : 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* Dynamic Visitor Counter & CTA Right (Desktop & iPad) */}

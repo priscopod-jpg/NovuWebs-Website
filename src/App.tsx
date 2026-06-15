@@ -138,11 +138,27 @@ export default function App() {
     return () => clearInterval(flowInterval);
   }, []);
 
-  const handleScrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const [currentPage, setCurrentPage] = useState("home");
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path.includes("services")) {
+      setCurrentPage("services");
+    } else if (path.includes("process")) {
+      setCurrentPage("process");
+    } else if (path.includes("calculator")) {
+      setCurrentPage("calculator");
+    } else if (path.includes("results")) {
+      setCurrentPage("results");
+    } else if (path.includes("contact")) {
+      setCurrentPage("contact");
+    } else {
+      setCurrentPage("home");
     }
+  }, []);
+
+  const handleScrollToSection = (id: string) => {
+    window.location.href = `/${id}.html`;
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -267,7 +283,8 @@ export default function App() {
       <Navbar onScrollTo={handleScrollToSection} />
 
       {/* SECTION 2 — HERO */}
-      <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-12 sm:pb-16 dot-grid-animated">
+      {currentPage === "home" && (
+        <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-12 sm:pb-16 dot-grid-animated">
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bg to-transparent pointer-events-none z-10" />
         
         {/* Low opacity Golden ambient backglow on right panel area */}
@@ -376,9 +393,11 @@ export default function App() {
 
         </div>
       </section>
+      )}
 
       {/* SECTION 3 — TICKER BAR */}
-      <section className="py-5 bg-black border-y border-white/5 overflow-hidden select-none">
+      {currentPage === "home" && (
+        <section className="py-5 bg-black border-y border-white/5 overflow-hidden select-none">
         <div className="relative w-full overflow-hidden">
           {/* Ticker scrolling track */}
           <div className="animate-ticker-scroll whitespace-nowrap flex items-center gap-10">
@@ -422,9 +441,11 @@ export default function App() {
           </div>
         </div>
       </section>
+      )}
 
       {/* SECTION 4 — PROBLEMS */}
-      <section id="results" className="py-20 bg-bg2 relative border-b border-white/5">
+      {currentPage === "results" && (
+        <section id="results" className="py-20 bg-bg2 relative border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">
@@ -529,9 +550,11 @@ export default function App() {
 
         </div>
       </section>
+      )}
 
       {/* SECTION 5 — SERVICES */}
-      <section id="services" className="py-20 bg-bg border-b border-white/5 relative">
+      {currentPage === "services" && (
+        <section id="services" className="py-20 bg-bg border-b border-white/5 relative">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">
@@ -648,9 +671,11 @@ export default function App() {
 
         </div>
       </section>
+      )}
 
       {/* SECTION 6 — PROCESS */}
-      <section id="process" className="py-20 bg-bg2 relative border-b border-white/5">
+      {currentPage === "process" && (
+        <section id="process" className="py-20 bg-bg2 relative border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-14">
@@ -755,9 +780,11 @@ export default function App() {
           </div>
         </div>
       </section>
+      )}
 
       {/* SECTION 7 — INTERACTIVE REVENUE LOSS CALCULATOR */}
-      <section id="calculator" className="py-20 bg-bg relative">
+      {currentPage === "calculator" && (
+        <section id="calculator" className="py-20 bg-bg relative">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">
@@ -776,9 +803,11 @@ export default function App() {
 
         </div>
       </section>
+      )}
 
       {/* SECTION 8 — ANIMATED STATS BAR */}
-      <section className="py-12 bg-bg3 border-y border-white/5">
+      {currentPage === "calculator" && (
+        <section className="py-12 bg-bg3 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             
@@ -810,9 +839,11 @@ export default function App() {
           </div>
         </div>
       </section>
+      )}
 
       {/* SECTION 9 — FINAL CTA & CONTACT FORM */}
-      <section id="contact" className="py-24 bg-bg2 relative border-t border-white/5">
+      {currentPage === "contact" && (
+        <section id="contact" className="py-24 bg-bg2 relative border-t border-white/5">
         {/* Glow behind section */}
         <div className="absolute left-[35%] top-[10%] w-[500px] h-[500px] rounded-full bg-[hsl(42,56%,5%)] filter blur-[150px] pointer-events-none" />
 
@@ -1011,6 +1042,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      )}
 
       {/* SECTION 10 — FOOTER */}
       <footer className="bg-[#060606] border-t border-[rgba(201,168,76,0.15)] py-14 relative z-20">
