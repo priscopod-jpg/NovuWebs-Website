@@ -86,10 +86,16 @@ app.post("/api/chat", async (req, res) => {
 
     // Format history for the generateContentStream call
     // contents must be an array of Content objects: { role, parts: [{ text }] }
-    const formattedContents = history.map((h: any) => ({
-      role: h.role,
+    let formattedContents = history.map((h: any) => ({
+      role: h.role === "user" ? "user" : "model",
       parts: Array.isArray(h.parts) ? h.parts : [{ text: h.text || "" }]
     }));
+
+    // Gemini contents MUST start with a "user" role turn.
+    // If the first message in history is from the model (e.g. welcome message), remove it.
+    while (formattedContents.length > 0 && formattedContents[0].role === "model") {
+      formattedContents.shift();
+    }
 
     // Add the current user message
     formattedContents.push({
@@ -120,7 +126,7 @@ app.post("/api/chat", async (req, res) => {
   } catch (error: any) {
     console.error("Gemini stream error:", error);
     // Graceful error fallback
-    res.write(`data: ${JSON.stringify({ text: " (Service currently operating in demo mode) Would you like to schedule an appointment with Mike's Plumbing?" })}\n\n`);
+    res.write(`data: ${JSON.stringify({ text: getFallbackStream(message) })}\n\n`);
     res.write("data: [DONE]\n\n");
     res.end();
   }
@@ -140,7 +146,7 @@ async function startServer() {
     app.use(express.static(distPath, { extensions: ["html"] }));
     
     // Explicit mappings for multi-page structure
-    app.get("/services", (req, res) => res.sendFile(path.join(distPath, "services.html")));
+    app.get("/services", (req, res) => res.sendFile(path.join(distPath, "index.html")));
     app.get("/process", (req, res) => res.sendFile(path.join(distPath, "process.html")));
     app.get("/calculator", (req, res) => res.sendFile(path.join(distPath, "calculator.html")));
     app.get("/results", (req, res) => res.sendFile(path.join(distPath, "results.html")));

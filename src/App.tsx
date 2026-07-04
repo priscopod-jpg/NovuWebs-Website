@@ -143,7 +143,7 @@ export default function App() {
   useEffect(() => {
     const path = window.location.pathname;
     if (path.includes("services")) {
-      setCurrentPage("services");
+      setCurrentPage("home");
     } else if (path.includes("process")) {
       setCurrentPage("process");
     } else if (path.includes("calculator")) {
@@ -554,8 +554,8 @@ export default function App() {
       )}
 
       {/* SECTION 5 — SERVICES */}
-      {currentPage === "services" && (
-        <section id="services" className="pt-32 md:pt-40 pb-20 bg-bg border-b border-white/5 relative">
+      {currentPage === "home" && (
+        <section id="services" className="py-20 bg-bg border-b border-white/5 relative">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">

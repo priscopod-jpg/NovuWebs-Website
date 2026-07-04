@@ -15,7 +15,6 @@ export default defineConfig(() => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
-          services: path.resolve(__dirname, 'services.html'),
           process: path.resolve(__dirname, 'process.html'),
           calculator: path.resolve(__dirname, 'calculator.html'),
           results: path.resolve(__dirname, 'results.html'),

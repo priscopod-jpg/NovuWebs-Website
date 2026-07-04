@@ -36,9 +36,7 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
 
   useEffect(() => {
     const path = window.location.pathname;
-    if (path.includes("services")) {
-      setActiveId("services");
-    } else if (path.includes("process")) {
+    if (path.includes("process")) {
       setActiveId("process");
     } else if (path.includes("calculator")) {
       setActiveId("calculator");
@@ -52,7 +50,6 @@ export default function Navbar({ onScrollTo }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: "Services", id: "services" },
     { name: "Process", id: "process" },
     { name: "Calculator", id: "calculator" },
     { name: "Results", id: "results" },
