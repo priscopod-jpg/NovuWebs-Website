@@ -155,6 +155,7 @@ export default function App() {
     } else {
       setCurrentPage("home");
     }
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   const handleScrollToSection = (id: string) => {
@@ -284,7 +285,7 @@ export default function App() {
 
       {/* SECTION 2 — HERO */}
       {currentPage === "home" && (
-        <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-12 sm:pb-16 dot-grid-animated">
+        <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-32 md:pt-40 pb-12 sm:pb-16 dot-grid-animated">
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bg to-transparent pointer-events-none z-10" />
         
         {/* Low opacity Golden ambient backglow on right panel area */}
@@ -445,7 +446,7 @@ export default function App() {
 
       {/* SECTION 4 — PROBLEMS */}
       {currentPage === "results" && (
-        <section id="results" className="py-20 bg-bg2 relative border-b border-white/5">
+        <section id="results" className="pt-32 md:pt-40 pb-20 bg-bg2 relative border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">
@@ -554,7 +555,7 @@ export default function App() {
 
       {/* SECTION 5 — SERVICES */}
       {currentPage === "services" && (
-        <section id="services" className="py-20 bg-bg border-b border-white/5 relative">
+        <section id="services" className="pt-32 md:pt-40 pb-20 bg-bg border-b border-white/5 relative">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">
@@ -675,7 +676,7 @@ export default function App() {
 
       {/* SECTION 6 — PROCESS */}
       {currentPage === "process" && (
-        <section id="process" className="py-20 bg-bg2 relative border-b border-white/5">
+        <section id="process" className="pt-32 md:pt-40 pb-20 bg-bg2 relative border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-14">
@@ -784,7 +785,7 @@ export default function App() {
 
       {/* SECTION 7 — INTERACTIVE REVENUE LOSS CALCULATOR */}
       {currentPage === "calculator" && (
-        <section id="calculator" className="py-20 bg-bg relative">
+        <section id="calculator" className="pt-32 md:pt-40 pb-20 bg-bg relative">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="max-w-3xl mb-12">
@@ -843,7 +844,7 @@ export default function App() {
 
       {/* SECTION 9 — FINAL CTA & CONTACT FORM */}
       {currentPage === "contact" && (
-        <section id="contact" className="py-24 bg-bg2 relative border-t border-white/5">
+        <section id="contact" className="pt-32 md:pt-40 pb-24 bg-bg2 relative border-t border-white/5">
         {/* Glow behind section */}
         <div className="absolute left-[35%] top-[10%] w-[500px] h-[500px] rounded-full bg-[hsl(42,56%,5%)] filter blur-[150px] pointer-events-none" />
 
